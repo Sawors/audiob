@@ -7,10 +7,8 @@ index.html
 packages/
   |- [package_name]/
   |    |- cover.png
-  |    |- audio.mp3
-  |    |- transcript.json
   |    |- meta.json
-  |    |- [other files included in the package]...
+  |    |- [package_name].zip
   |- [another package]/...
   |...
 ```
