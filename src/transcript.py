@@ -126,7 +126,7 @@ def get_filename(file:str, keep_extension=True) -> str:
     return filename.split(".")[0]
 
 def as_output_file(file:str, extension=".json") -> str:
-    output_dir_path = f"{path.dirname(__file__)}{path.sep}{OUTPUT_DIR}"
+    output_dir_path = f"{os.getcwd()}{path.sep}{OUTPUT_DIR}"
     #f_clean = f.replace(" "," ")
     return f"{output_dir_path}{path.sep}{get_filename(file)}{extension}"
 
@@ -157,6 +157,7 @@ def transcribe(input_file:str, model=MODEL, iterations=ITERATIONS) -> list:
         file_size = path.getsize(f)
         # https://github.com/jianfch/stable-ts 
         import stable_whisper as whisper
+        print("Loading model...")
         model = whisper.load_model(model)
         print("Transcription beginning...")
         for i in range(iterations):
@@ -193,8 +194,8 @@ def transcribe(input_file:str, model=MODEL, iterations=ITERATIONS) -> list:
                 seg.append(
                 WordFragment(
                     word=w.word,
-                    start=w.start,
-                    end=w.end
+                    start=int(w.start*1000),
+                    end=int(w.end*1000)
                 )
             )
             data_list.append(seg)
@@ -214,7 +215,7 @@ def play_sync(input_file):
     offset = data[0][0]["start"]
     ##
     player_delay = 0
-    word_preshot_delay = 0.1
+    word_preshot_delay = 100
     ##
     sleep(max(player_delay+offset,0))
     for index, seg in enumerate(data):
