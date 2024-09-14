@@ -21,7 +21,9 @@ packages/
   "title": "The Hobbit",
   "author": "J. R. R. Tolkien",
   "edition": "??",
-  "description": "In a hole, in the ground, there lived a hobbit."
+  "description": "In a hole, in the ground, there lived a hobbit.",
+  "part": 0,
+  "type": "book",
   "files": {
     "audio": "audio.mp3",
     "transcript": "transcript.json",
@@ -36,3 +38,4 @@ Metadata files are inherited from the parent directory, so any undefined field w
 
 The `part` field should contain the unique number of each part of a content. All meta files in the directory tree are read when the package is loaded, and the parts are ordered according to their part number.
 
+The `type` field is used to indicate the type of the package. It can hold one of three values : `book`, `music` or `other`. It is used to group packages inside the application and to apply specific display modes.
